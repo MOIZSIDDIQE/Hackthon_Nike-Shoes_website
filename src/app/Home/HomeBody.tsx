@@ -25,7 +25,7 @@ const HomeBody = () => {
               alt="Shoes "
             />
 
-            <div className="flex justify-between">
+            <div className="flex justify-between mt-3">
               <h3 className="font-medium">Nike Air Max Pulse</h3>
               <p>₹ 13 995</p>
             </div>
@@ -41,7 +41,7 @@ const HomeBody = () => {
               alt="Shoes "
             />
 
-            <div className="flex justify-between">
+            <div className="flex justify-between mt-3">
               <h3 className="font-medium">Nike Air Max Pulse</h3>
               <p>₹ 13 995</p>
             </div>
@@ -57,7 +57,7 @@ const HomeBody = () => {
               alt="Shoes "
             />
 
-            <div className="flex justify-between">
+            <div className="flex justify-between mt-3">
               <h3 className="font-medium">Nike Air Max Pulse</h3>
               <p>₹ 16 995</p>
             </div>
@@ -150,7 +150,7 @@ const HomeBody = () => {
         </div>
       </div>
 
-      {/* Essential section  */}
+      {/* Flight Essential */}
       <div className="px-10 mt-20">
         <h1 className="font-medium text-xl ">Don't Miss</h1>
         <div className=" flex content-center my-7 ">
@@ -165,12 +165,66 @@ const HomeBody = () => {
         </button>
         </div>
       </div>
-      <div className="my-20">
+
+
+      {/* Essential section  */}
+      <div className="my-20 px-14">
         <h1 className="font-medium text-2xl">The Essential</h1>
-        <div className="flex justify-center gap-3">
+        <div className="flex justify-center gap-3 py-6">
+        <div className="relative">
         <Image src="/assest/mens_pic.jpg" width={400} height={550} alt='Esential ' />
+                <button className="bg-white text-black px-5 py-2 rounded-full absolute bottom-10 left-8">Men's</button>
+        </div>
+        <div className="relative">
         <Image src="/assest/women_pic.jpg" width={400} height={550} alt='Esential ' />
+                <button className="bg-white text-black px-5 py-2 rounded-full absolute bottom-10 left-8">Women's</button>
+        </div>
+        <div className="relative">
         <Image src="/assest/kid_pic.jpg" width={400} height={550} alt='Esential ' />
+                <button className="bg-white text-black px-5 py-2 rounded-full absolute bottom-10 left-8">Kid's</button>
+        </div>
+        </div>
+      </div>
+
+      {/* Links  */}
+      <div className="flex justify-center items-center pb-20">
+        <div className="flex justify-between gap-28">
+          <div className="">
+            <p className="font-medium mb-10">Icons</p>
+            <div className="text-[#757575] space-y-3">
+              <p>Air Force 1</p>
+              <p>Huarache</p>
+              <p>Air Max 90</p>
+              <p>Air Max 95</p>
+            </div>
+          </div>
+          <div className="">
+            <p className="font-medium mb-10">Shoes</p>
+            <div className="text-[#757575] space-y-3">
+              <p>All Shoes</p>
+              <p>Custom Shoes</p>
+              <p>Jordan Shoes</p>
+              <p>Running Shoes</p>
+            </div>
+          </div>
+          <div className="">
+            <p className="font-medium mb-10">Clothing</p>
+            <div className="text-[#757575] space-y-3">
+              <p>All Clothing</p>
+              <p>Modest Wear</p>
+              <p>Hoodies & Pullovers</p>
+              <p>Shirts & Tops</p>
+            </div>
+          </div>
+          <div className="">
+            <p className="font-medium mb-10">Kids'</p>
+            <div className="text-[#757575] space-y-3">
+              <p>Infant & Toddler Shoes</p>
+              <p>Kids' Shoes</p>
+              <p>Kids' Jordan Shoes</p>
+              <p>Kids' Basketball Shoes</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

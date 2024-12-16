@@ -1,7 +1,7 @@
 import Image from "next/image";
-import Navbar from "./Componenet/Navbar";
-import Hero from "./Componenet/Hero";
-import HomeBody from "./Componenet/HomeBody";
+import Navbar from "./Navbar";
+import Hero from "./Home/Hero";
+import HomeBody from "./Home/HomeBody";
 
 
 export default function Home() {
