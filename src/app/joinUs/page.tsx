@@ -48,7 +48,7 @@ const page = () => {
                     </div>
                     <div className="text-center">
                         <p className="">Not a Member? <span className="text-black underline">
-                            <Link href="/sign"></Link></p>
+                            <Link href="/sign"></Link> </span></p>
                     </div>
                 </div>
             </div>
