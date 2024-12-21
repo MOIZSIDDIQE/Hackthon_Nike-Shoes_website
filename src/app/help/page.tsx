@@ -15,7 +15,7 @@ const page = () => {
           </div>
         </div>
 
-        {/* FAQs and Payment option */}
+        {/* Payment option */}
         <div className="px-16 flex pb-16">
           <div className="flex flex-col gap-8 leading-7 pr-7">
             <h1 className="text-3xl font-medium">WHAT PAYMENT OPTIONS CAN I USE ON NIKE ORDERS?</h1>
@@ -26,6 +26,8 @@ const page = () => {
               <button className="bg-black text-white rounded-full  py-2 px-5">JOIN US</button>
               <button className="bg-black text-white rounded-full  py-2 px-5 ml-4">SHOP NIKE</button>
             </div>
+
+            {/* FAQs  */}
             <h1 className="font-semibold text-2xl">FAQs</h1>
             <div className="">
               <p className="font-semibold">Does my card need international purchases enabled?</p>
