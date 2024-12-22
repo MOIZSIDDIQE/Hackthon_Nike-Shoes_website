@@ -56,6 +56,8 @@ const page = () => {
                             </div>
                         </div>
                     </div>
+
+                    {/* Summary */}
                     <div className="w-80 space-y-5">
                         <h1 className="text-2xl mb-7">Summary</h1>
                         <div className="flex justify-between">
