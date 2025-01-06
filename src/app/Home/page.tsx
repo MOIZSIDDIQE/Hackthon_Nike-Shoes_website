@@ -21,7 +21,7 @@ const HomeBody = () => {
         <div className="flex justify-around gap-5 mt-3 ">
           <div className="">
             <Image
-              src="/assest/Max_Shoes.jpg"
+              src="/assest/Max_shoes.jpg"
               width={400}
               height={400}
               alt="Shoes "
@@ -37,7 +37,7 @@ const HomeBody = () => {
 
           <div className="">
             <Image
-              src="/assest/Max_Shoes.jpg"
+              src="/assest/Max_shoes.jpg"
               width={400}
               height={400}
               alt="Shoes "
@@ -53,7 +53,7 @@ const HomeBody = () => {
 
           <div className="">
             <Image
-              src="/assest/max_Shoes2.jpg"
+              src="/assest/max_shoes2.jpg"
               width={400}
               height={400}
               alt="Shoes "
