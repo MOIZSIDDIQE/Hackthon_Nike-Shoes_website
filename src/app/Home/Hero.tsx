@@ -16,7 +16,7 @@ const Hero = () => {
       <div className="flex flex-col text-center items-center justify-center  ">
 
         {/* Hero Image */}
-        <Image src="/assest/image.svg" width={1200} height={750} alt='HeroPic ' />
+        <Image src="/assest/Image.svg" width={1200} height={750} alt='HeroPic ' />
 
         {/*Description*/}
         <div className="w[580px] h-[350p] space-y-6 p-20">
