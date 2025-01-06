@@ -12,7 +12,7 @@ const page = () => {
                             <p className="text-xl mb-2">Free Delivery</p>
                             <p className="">Applies to orders of ₹ 14 000.00 or more. <span className="underline font-medium">View details</span></p>
                         </div>
-                        <p className='font-medium text-2xl'>Bag</p> 
+                        <p className='font-medium text-2xl'>Bag</p>
 
                         {/* cart 1 */}
                         <div className="flex gap-3 text-[#757575] pb-6">

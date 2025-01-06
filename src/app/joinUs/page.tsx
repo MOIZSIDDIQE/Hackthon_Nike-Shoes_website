@@ -47,8 +47,8 @@ const page = () => {
                         </button>
                     </div>
                     <div className="text-center">
-                        <p className="">Not a Member? <span className="text-black underline">
-                            <Link href="/sign"></Link> </span></p>
+                        <p className="">Already a Member? <span className="text-black underline">
+                            <Link href="/sign">Sign in.</Link> </span></p>
                     </div>
                 </div>
             </div>

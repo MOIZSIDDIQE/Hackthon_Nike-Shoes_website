@@ -13,7 +13,7 @@ const Card = (props:any) => {
                 />
 
                 <div className="space-y-4 pt-4 pb-6">
-                    <p className="">{props.tag}</p>
+                    <p className="text-[#9E3500]">{props.tag}</p>
                     <div className="space-y-1 text-[#757575]">
                         <p className="font-medium text-black">{props.heading}</p>
                         <p className="">{props.description}</p>

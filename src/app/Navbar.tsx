@@ -20,13 +20,13 @@ const Navbar = () => {
                                 <Link href="/Products" className="">Find a Store </Link>
                             </li>
                             <li className="my-2 px-2 border-r-2 border-black">
-                                <Link href="/login" className="">Help </Link>
+                                <Link href="/help" className="">Help </Link>
                             </li>
                             <li className="my-2 px-2 border-r-2 border-black">
                                 <Link href="/joinUs" className="">Join Us </Link>
                             </li>
                             <li className="my-2 px-2 ">
-                                <Link href="" className="">Sign In</Link>
+                                <Link href="/login" className="">Sign In</Link>
                             </li>
                         </ul>
                     </div>
@@ -39,7 +39,7 @@ const Navbar = () => {
                     </svg>
                 </div>
                 <div className="ml-16">
-                    <ul className="flex w-[420px] justify-between">
+                    <ul className="flex w-[420p] gap-5 justify-between">
                         <li className="">
                             <Link href="/ProductDetail" className="">New & Features</Link>
                         </li>
@@ -60,13 +60,15 @@ const Navbar = () => {
                         </li>
                     </ul>
                 </div>
-                <div className="flex justify-between w-72">
+                <div className="flex justify-between w-72 ">
                     <div className="flex bg-[#F5F5F5] rounded-full w-48 p-2">
                         <Image className='mr-5' src="/Vector.svg" width={24} height={24} alt='Heart' />
                         <input type="search" placeholder='Search' className=' placeholder:text-gray-400 w-24 h-6 bg-transparent' />
                     </div>
-                    <Image src="/Heart.svg" width={24} height={24} alt='Heart' />
-                    <Image src="/store.svg" width={24} height={24} alt='store' />
+                    <div className="md:flex justify-between gap-5 hidden">
+                        <Image src="/Heart.svg" width={24} height={24} alt='Heart' />
+                        <Image src="/store.svg" width={24} height={24} alt='store' />
+                    </div>
                 </div>
             </div>
         </nav>
