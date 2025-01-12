@@ -1,11 +1,10 @@
 import Image from 'next/image'
 import React from 'react'
 
-
 const GearCard = (props: any) => {
     return (
         <>
-            <div className="w-[310px]">
+            <div className="xl:w-[310px] w-[450px]">
                 <Image
                     src={props.Link}
                     width={310}

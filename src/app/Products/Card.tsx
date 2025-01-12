@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
+import {cardData} from './cardData.js'
 
 const Card = (props:any) => {
     return (

@@ -6,7 +6,7 @@ const page = () => {
     return (
         <>
             <div className="flex justify-center pt-16  pb-24">
-                <div className="flex gap-6">
+                <div className="flex max-lg:flex-col gap-6">
                     <div className="w-[700px] space-y-9">
                         <div className="bg-[#F5F5F5] p-3">
                             <p className="text-xl mb-2">Free Delivery</p>
