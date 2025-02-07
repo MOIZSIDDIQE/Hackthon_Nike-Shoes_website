@@ -52,47 +52,53 @@ const HomeBody = () => {
 
           {/* Swiper Section */}
           <Swiper
-  ref={swiperRef}
-  slidesPerView={3}
-  spaceBetween={30}
-  modules={[Navigation]}
-  className="py-6"
->
-  {productList.map((product) => (
-    <SwiperSlide key={product._id} className="flex justify-center">
-      <Link href={`/product/${product.slug.current}`} className="group">
-        <div className="relative bg-white/70 backdrop-blur-md border border-gray-200 rounded-xl shadow-xl p-6 transition-all duration-300 transform group-hover:scale-110 group-hover:shadow-2xl">
-          
-          {/* Product Image with Overlay */}
-          <div className="relative overflow-hidden rounded-xl">
-            <Image
-              src={urlFor(product.image).url()}
-              width={400}
-              height={400}
-              alt={product.productName}
-              className="rounded-xl object-cover group-hover:opacity-90 transition-opacity duration-300"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
-          </div>
+            ref={swiperRef}
+            slidesPerView={3}
+            spaceBetween={30}
+            modules={[Navigation]}
+            className="py-6"
+          >
+            {productList.map((product) => (
+              <SwiperSlide key={product._id} className="flex justify-center">
+                <Link href={`/product/${product.slug.current}`} className="group">
+                  <div className="relative bg-white/70 backdrop-blur-md border border-gray-200 rounded-xl shadow-xl p-6 transition-all duration-300 transform group-hover:scale-110 group-hover:shadow-2xl">
 
-          {/* Product Details */}
-          <div className="mt-4 text-center space-y-2">
-            <h3 className="text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
-              {product.productName}
-            </h3>
-            <p className="text-gray-600 text-sm uppercase tracking-wide">{product._type}</p>
-            <p className="text-2xl font-bold text-black mt-2">₹ {product.price}</p>
-          </div>
-          
-          {/* Hover Button */}
-          <button className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black text-white px-6 py-2 rounded-full text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            View Details
-          </button>
-        </div>
-      </Link>
-    </SwiperSlide>
-  ))}
-</Swiper>
+                    {/* Product Image with Overlay */}
+                    {product.image ? (
+                      <div className="relative overflow-hidden rounded-xl">
+                        <Image
+                          src={urlFor(product.image).url()}
+                          width={400}
+                          height={400}
+                          alt={product.productName}
+                          className="rounded-xl object-cover group-hover:opacity-90 transition-opacity duration-300"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+                      </div>
+                    ) : (
+                      <div className="relative overflow-hidden rounded-xl bg-gray-200 flex items-center justify-center h-[400px]">
+                        <span className="text-gray-500">No Image Available</span>
+                      </div>
+                    )}
+
+                    {/* Product Details */}
+                    <div className="mt-4 text-center space-y-2">
+                      <h3 className="text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
+                        {product.productName}
+                      </h3>
+                      <p className="text-gray-600 text-sm uppercase tracking-wide">{product._type}</p>
+                      <p className="text-2xl font-bold text-black mt-2">₹ {product.price}</p>
+                    </div>
+
+                    {/* Hover Button */}
+                    <button className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black text-white px-6 py-2 rounded-full text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      View Details
+                    </button>
+                  </div>
+                </Link>
+              </SwiperSlide>
+            ))}
+          </Swiper>
 
         </section>
 
