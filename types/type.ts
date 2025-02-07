@@ -18,6 +18,7 @@ export interface productType{
     },
     inventory : number;
     category : string;
+    gender : string;
     status : string;
 
 }

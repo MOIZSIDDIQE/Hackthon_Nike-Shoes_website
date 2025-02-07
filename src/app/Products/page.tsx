@@ -92,7 +92,7 @@ const Page = () => {
 
         if (selectedFilters.gender.size > 0) {
             filtered = filtered.filter(item =>
-                Array.from(selectedFilters.gender).some(gender =>
+                item.gender && Array.from(selectedFilters.gender).some(gender =>
                     item.gender?.toLowerCase() === gender.toLowerCase()
                 )
             );
@@ -101,7 +101,7 @@ const Page = () => {
         if (selectedFilters.kids.size > 0) {
             filtered = filtered.filter(item =>
                 Array.from(selectedFilters.kids).some(kidCategory =>
-                    item.kidCategory?.toLowerCase() === kidCategory.toLowerCase()
+                    item.category?.toLowerCase() === kidCategory.toLowerCase()
                 )
             );
         }
