@@ -1,83 +1,216 @@
-import React from 'react'
-import GearCard from '../Home/GearCard'
-import Image from 'next/image'
+"use client"
+import { useEffect, useState } from "react"
+import type { productType } from "../../../types/type"
+import { getCartItems, removeFromCart, updateCartQuantity } from "../action/action"
+import Image from "next/image"
+import Link from "next/link"
+import Swal from "sweetalert2"
+import { urlFor } from "@/sanity/lib/image"
 
-const page = () => {
+const Page = () => {
+    const [cartItems, setCartItems] = useState<productType[]>([])
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        setCartItems(getCartItems())
+        setLoading(false)
+    }, [])
+
+    console.log(cartItems);
+    
+
+    const handleRemove = (id: string) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to undo this action!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, remove it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                removeFromCart(id)
+                setCartItems(getCartItems())
+                Swal.fire("Removed!", "Item has been removed from cart", "success")
+            }
+        })
+    }
+
+    const handleQuantity = (id: string, quantity: number) => {
+        updateCartQuantity(id, quantity)
+        setCartItems(getCartItems())
+    }
+
+    const handleIncrement = (id: string) => {
+        const product = cartItems.find((item) => item._id === id)
+        if (product) handleQuantity(id, product.inventory + 1)
+    }
+
+    const handleDecrement = (id: string) => {
+        const product = cartItems.find((item) => item._id === id)
+        if (product && product.inventory > 1) handleQuantity(id, product.inventory - 1)
+    }
+
+    const calculateSubtotal = () => {
+        return cartItems.reduce((total, item) => total + item.price * item.inventory, 0)
+    }
+
+    const formatPrice = (price: number) => {
+        return new Intl.NumberFormat("en-IN", {
+            style: "currency",
+            currency: "INR",
+        }).format(price)
+    }
+
+    const handleProceed = () => {
+        if (cartItems.length === 0) {
+            Swal.fire({
+                title: "Empty Cart",
+                text: "Please add items to your cart before proceeding",
+                icon: "warning",
+            })
+            return
+        }
+
+        Swal.fire({
+            title: "Processing your order...",
+            text: "Please wait a moment.",
+            icon: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Proceed",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire("Success!", "Your order has been successfully processed!", "success")
+                setCartItems([])
+            }
+        })
+    }
+
+    if (loading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
+            </div>
+        )
+    }
+
     return (
-        <>
-            <div className="flex justify-center pt-16  pb-24">
-                <div className="flex max-lg:flex-col gap-6">
-                    <div className="w-[700px] space-y-9">
-                        <div className="bg-[#F5F5F5] p-3">
-                            <p className="text-xl mb-2">Free Delivery</p>
-                            <p className="">Applies to orders of ₹ 14 000.00 or more. <span className="underline font-medium">View details</span></p>
-                        </div>
-                        <p className='font-medium text-2xl'>Bag</p>
-
-                        {/* cart 1 */}
-                        <div className="flex gap-3 text-[#757575] pb-6">
-                            <Image src="/assest/man1.jpg " width={170} height={170} alt='cart image' />
-                            <div className="w-[518px] space-y-2">
-                                <div className="flex justify-between text-black ">
-                                    <p>Nike Dri-FIT ADV TechKnit Ultra</p>
-                                    <p>MRP: ₹ 3 895.00</p>
-                                </div>
-                                <p>Men's Short-Sleeve Running Top</p>
-                                <p>Ashen Slate/Cobalt Bliss</p>
-                                <div className="flex gap-12 pb-4">
-                                    <p>Size L</p>
-                                    <p>Quantity 1</p>
-                                </div>
-                                <div className="flex gap-5 ">
-                                    <Image src="/Heart.svg" width={24} height={24} alt='Heart' />
-                                    <Image src="/delete.svg" width={24} height={24} alt='Delete' />
-                                </div>
-                            </div>
+        <div className="min-h-screen bg-gray-50">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div className="flex max-lg:flex-col gap-8">
+                    <div className="lg:w-2/3 space-y-6">
+                        {/* Free Delivery Banner */}
+                        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                            <p className="text-xl font-semibold mb-2">Free Delivery</p>
+                            <p className="text-gray-600">
+                                Applies to orders of {formatPrice(14000)} or more.{" "}
+                                <button className="underline font-medium hover:text-black transition-colors">View details</button>
+                            </p>
                         </div>
 
-                        {/* cart 2 */}
-                        <div className="flex gap-3 text-[#757575] py-12 border-y-2 border-[#E5E5E5]">
-                            <div className="w-44 h-44"></div>
-                            <div className="w-[518px] space-y-2">
-                                <div className="flex justify-between text-black ">
-                                    <p>Nike Air Max 97 SE</p>
-                                    <p>MRP: ₹ 16 995.00</p>
+                        {/* Cart Items */}
+                        <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+                            <h2 className="text-2xl font-bold p-6 border-b">
+                                Cart ({cartItems.length} {cartItems.length === 1 ? "item" : "items"})
+                            </h2>
+
+                            {cartItems.length === 0 ? (
+                                <div className="p-8 text-center">
+                                    <p className="text-gray-500 mb-4">Your cart is empty</p>
+                                    <Link href="/" className="text-blue-600 hover:underline">
+                                        Continue Shopping
+                                    </Link>
                                 </div>
-                                <p>Men's Shoes</p>
-                                <p>Flat Pewter/Light Bone/Black/White</p>
-                                <div className="flex gap-12 pb-4">
-                                    <p>Size 8</p>
-                                    <p>Quantity 1</p>
+                            ) : (
+                                <div className="divide-y">
+                                    {cartItems.map((item) => (
+                                        <div key={item._id} className="p-6 flex gap-6">
+                                            <div className="w-24 h-24 relative flex-shrink-0">
+                                                <Image
+                                                    src={urlFor(item.image).url()}
+                                                    alt={item.productName}
+                                                    className="rounded-md"
+                                                    width={96}
+                                                    height={96}
+                                                />
+                                            </div>
+                                            <div className="flex-1 space-y-3">
+                                                <div className="flex justify-between">
+                                                    <h3 className="font-semibold text-lg">{item.productName}</h3>
+                                                    <p className="font-medium">{formatPrice(item.price * item.inventory)}</p>
+                                                </div>
+                                                <p className="text-gray-600">{item.category}</p>
+                                                <div className="flex items-center gap-4">
+                                                    <div className="flex items-center border rounded-md">
+                                                        <button
+                                                            onClick={() => handleDecrement(item._id)}
+                                                            className="px-3 py-1 hover:bg-gray-100 transition-colors"
+                                                            disabled={item.inventory <= 1}
+                                                        >
+                                                            -
+                                                        </button>
+                                                        <span className="px-3 py-1 border-x">{item.inventory}</span>
+                                                        <button
+                                                            onClick={() => handleIncrement(item._id)}
+                                                            className="px-3 py-1 hover:bg-gray-100 transition-colors"
+                                                        >
+                                                            +
+                                                        </button>
+                                                    </div>
+                                                    <button
+                                                        onClick={() => handleRemove(item._id)}
+                                                        className="text-red-600 hover:text-red-700 text-sm"
+                                                    >
+                                                        Remove
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
-                                <div className="flex gap-5 ">
-                                    <Image src="/Heart.svg" width={24} height={24} alt='Heart' />
-                                    <Image src="/delete.svg" width={24} height={24} alt='Delete' />
-                                </div>
-                            </div>
+                            )}
                         </div>
                     </div>
 
                     {/* Summary */}
-                    <div className="w-80 space-y-5">
-                        <h1 className="text-2xl mb-7">Summary</h1>
-                        <div className="flex justify-between">
-                            <p>Subtotal</p>
-                            <p>₹ 20 890.00</p>
+                    <div className="lg:w-1/3">
+                        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 sticky top-6">
+                            <h2 className="text-2xl font-bold mb-6">Summary</h2>
+                            <div className="space-y-4">
+                                <div className="flex justify-between">
+                                    <p className="text-gray-600">Subtotal</p>
+                                    <p className="font-medium">{formatPrice(calculateSubtotal())}</p>
+                                </div>
+                                <div className="flex justify-between">
+                                    <p className="text-gray-600">Estimated Delivery & Handling</p>
+                                    <p className="font-medium">Free</p>
+                                </div>
+                                <div className="border-t pt-4 mt-4">
+                                    <div className="flex justify-between">
+                                        <p className="font-semibold">Total</p>
+                                        <p className="font-bold">{formatPrice(calculateSubtotal())}</p>
+                                    </div>
+                                </div>
+                                <button
+                                    onClick={handleProceed}
+                                    className="w-full  text-white rounded-full py-4 font-medium bg-black transition-colors mt-6"
+                                >
+                                    Proceed to Checkout
+                                </button>
+                                <Link href="/" className="block text-center text-gray-600 hover:text-black transition-colors mt-4">
+                                    Continue Shopping
+                                </Link>
+                            </div>
                         </div>
-                        <div className="flex justify-between ">
-                            <p>Estimated  Delivery & Handling </p>
-                            <p>Free</p>
-                        </div>
-                        <div className="flex justify-between py-5 border-y-2 border-[#E5E5E5]">
-                            <p>Total</p>
-                            <p className='font-medium'>₹ 20 890.00 </p>
-                        </div>
-                        <button className="bg-black text-white rounded-full  w-full py-4 ">Member Checkout</button>
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 
-export default page
+export default Page
+

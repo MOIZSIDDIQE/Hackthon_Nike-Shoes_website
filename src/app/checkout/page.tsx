@@ -54,7 +54,7 @@ const page = () => {
                     </div>
                     <div className="text-center">
                         <p className="">Already a Member? <span className="text-black underline">
-                            <Link href="/sign">Sign in.</Link> </span></p>
+                            <Link href="../login">Sign in.</Link> </span></p>
                     </div>
                 </div>
                 <div className="w-80 space-y-5">
