@@ -83,8 +83,8 @@ const Page = () => {
         let filtered = [...product];
 
         if (selectedFilters.categories.size > 0) {
-            filtered = filtered.filter(item => 
-                Array.from(selectedFilters.categories).some(cat => 
+            filtered = filtered.filter(item =>
+                Array.from(selectedFilters.categories).some(cat =>
                     item.category?.toLowerCase().includes(cat.toLowerCase())
                 )
             );
@@ -136,7 +136,7 @@ const Page = () => {
                         New ({filteredProducts.length})
                     </h1>
                     <div className="flex flex-wrap gap-4">
-                        <button 
+                        <button
                             onClick={() => setIsFilterVisible(!isFilterVisible)}
                             className="flex items-center gap-2 text-gray-600 hover:text-black transition-colors"
                         >
@@ -237,13 +237,15 @@ const Page = () => {
                                 <div key={pro._id} className="bg-white rounded-xl shadow-sm hover:scale-105 transition duration-300 overflow-hidden hover:shadow-md relative">
                                     <Link href={`/product/${pro.slug.current}`} className="block">
                                         <div className="aspect-square relative">
-                                            <Image
-                                                src={urlFor(pro.image).url()}
-                                                fill
-                                                style={{ objectFit: 'cover' }}
-                                                alt={pro.productName}
-                                                className=""
-                                            />
+                                            {pro.image && (
+                                                <Image
+                                                    src={urlFor(pro.image).url()}
+                                                    width={400}
+                                                    height={400}
+                                                    alt={pro.productName}
+                                                />
+                                            )}
+
                                         </div>
                                         <div className="p-4">
                                             <h3 className="font-semibold text-lg mb-2 line-clamp-2">{pro.productName}</h3>
