@@ -17,7 +17,7 @@ const Page = () => {
     }, [])
 
     console.log(cartItems);
-    
+
 
     const handleRemove = (id: string) => {
         Swal.fire({
@@ -129,14 +129,21 @@ const Page = () => {
                                     {cartItems.map((item) => (
                                         <div key={item._id} className="p-6 flex gap-6">
                                             <div className="w-24 h-24 relative flex-shrink-0">
-                                                <Image
-                                                    src={urlFor(item.image).url()}
-                                                    alt={item.productName}
-                                                    className="rounded-md"
-                                                    width={96}
-                                                    height={96}
-                                                />
+                                                {item?.image ? (
+                                                    <Image
+                                                        src={urlFor(item.image).url()}
+                                                        alt={item.productName || "Product Image"}
+                                                        className="rounded-md object-cover"
+                                                        width={96}
+                                                        height={96}
+                                                    />
+                                                ) : (
+                                                    <div className="w-24 h-24 bg-gray-200 flex items-center justify-center rounded-md">
+                                                        <span className="text-gray-500">No Image</span>
+                                                    </div>
+                                                )}
                                             </div>
+
                                             <div className="flex-1 space-y-3">
                                                 <div className="flex justify-between">
                                                     <h3 className="font-semibold text-lg">{item.productName}</h3>
