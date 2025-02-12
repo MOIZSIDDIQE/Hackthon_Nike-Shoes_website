@@ -15,7 +15,7 @@ export const productSchema = {
             options: {
                 source: "productName",
                 unique: true,
-                slugify: (input) =>
+                slugify: (input:any) =>
                     input
                         .toLowerCase()
                         .replace(/\s+/g, "-")
